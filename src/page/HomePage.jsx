@@ -480,9 +480,12 @@ function FirstPage() {
                                         real-time schemas.
                                     </div>
                                     <div className="md:text-[20px] text-[14px] font-semibold text-[#6A5BE1] flex gap-4">
-                                        <Link to="/AboutMe" className="">
+                                        <a
+                                            href="https://drive.google.com/file/d/1IkflZwN13VzZBTGu7gnXQpS8rBhIwVQP/view?usp=sharing"
+                                            className=""
+                                        >
                                             Download CV
-                                        </Link>{" "}
+                                        </a>{" "}
                                         <div className=" font-normal"> | </div>
                                         <a href="#Contact" className="">
                                             Contact Me!
