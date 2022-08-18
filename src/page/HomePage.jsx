@@ -108,18 +108,18 @@ function FirstPage() {
     const [message, setMessage] = useState("");
     const [alert, setAlert] = useState(false);
 
-    const handleTest = (e) => {
-        try {
-            e.preventDefault();
-            if (name !== "" || email !== "" || message !== "") {
-                console.log(e.target);
-            }
-            console.log("error");
-            setAlert(true);
-        } catch {
-            console.log("error");
-        }
-    };
+    // const handleTest = (e) => {
+    //     try {
+    //         e.preventDefault();
+    //         if (name !== "" || email !== "" || message !== "") {
+    //             console.log(e.target);
+    //         }
+    //         console.log("error");
+    //         setAlert(true);
+    //     } catch {
+    //         console.log("error");
+    //     }
+    // };
     function sendEmail(e) {
         e.preventDefault();
         if (name === "" || email === "" || message === "") {
