@@ -1,0 +1,591 @@
+import React, { useRef } from "react";
+import { Link } from "react-router-dom";
+import CardHome from "../components/element/CardHome";
+import Mobile from "../assets/image/Mobile.png";
+import NavHome from "../components/navbar/NavHome";
+import Footer from "../components/footer/Footer";
+import FeatureS from "../assets/image/FSocket.png";
+import FeatureJ from "../assets/image/FJodit.png";
+import devCatRecent from "../assets/image/devCatRecent.png";
+import trmRecent from "../assets/image/trmRecent.png";
+import emailjs from "@emailjs/browser";
+import { useState } from "react";
+import {
+    Animator,
+    ScrollContainer,
+    ScrollPage,
+    batch,
+    Fade,
+    FadeIn,
+    FadeOut,
+    Move,
+    MoveIn,
+    MoveOut,
+    Sticky,
+    StickyIn,
+    StickyOut,
+    Zoom,
+    ZoomIn,
+    ZoomOut,
+} from "react-scroll-motion";
+
+function TestFull() {
+    const technical = [
+        {
+            img: "https://res.cloudinary.com/do58tgs2e/image/upload/v1646850887/Logo/html5_cykxyz.png",
+            title: "HTML",
+        },
+        {
+            img: "https://res.cloudinary.com/do58tgs2e/image/upload/v1646850887/Logo/css3_wbgmop.png",
+            title: "CSS",
+        },
+        {
+            img: "https://res.cloudinary.com/do58tgs2e/image/upload/v1646850888/Logo/javascript_1_olaeqo.png",
+            title: "JavaScript",
+        },
+        {
+            img: "https://res.cloudinary.com/do58tgs2e/image/upload/v1646850888/Logo/react_pwxdqd.png",
+            title: "React",
+        },
+        {
+            img: "https://res.cloudinary.com/do58tgs2e/image/upload/v1646850887/Logo/bootstrap_mnwufe.png",
+            title: "Bootstrap",
+        },
+        {
+            img: "https://mui.com/static/logo.png",
+            title: "MUI",
+        },
+        {
+            img: "https://res.cloudinary.com/do58tgs2e/image/upload/v1647956586/Logo/Tailwind_CSS_Logo.svg_ytlfw3.png",
+            title: "Tailwind",
+        },
+        {
+            img: "https://seeklogo.com/images/H/headless-ui-logo-034B045C5C-seeklogo.com.png",
+            title: "Headless UI",
+        },
+        {
+            img: "https://res.cloudinary.com/do58tgs2e/image/upload/v1647957211/Logo/60953119-d3c6f300-a2fc-11e9-9596-4978e5d52180_1_fj7xyq.png",
+            title: "Framer Motion",
+        },
+        {
+            img: "https://res.cloudinary.com/do58tgs2e/image/upload/v1646850887/Logo/figma_ylvvry.png",
+            title: "Figma",
+        },
+        {
+            img: "https://res.cloudinary.com/do58tgs2e/image/upload/v1646850888/Logo/node-js_rmri8p.png",
+            title: "Node.JS",
+        },
+        {
+            img: "https://res.cloudinary.com/do58tgs2e/image/upload/v1647956945/Logo/Expressjs_kxuzzy.png",
+            title: "Express",
+        },
+
+        {
+            img: "https://res.cloudinary.com/do58tgs2e/image/upload/v1646851026/Logo/0d184ee3-fd8d-4b94-acf4-b4e686e57375_w18gei.png",
+            title: "Passport",
+        },
+        {
+            img: "https://user-images.githubusercontent.com/8939680/57233882-20344080-6fe5-11e9-9086-d20a955bed59.png",
+            title: "Axios",
+        },
+        {
+            img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Socket-io.svg/1200px-Socket-io.svg.png",
+            title: "Socket.io",
+        },
+        {
+            img: "https://res.cloudinary.com/do58tgs2e/image/upload/v1646850887/Logo/mysql_cqq3f9.png",
+            title: "Mysql",
+        },
+    ];
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [message, setMessage] = useState("");
+    const [alert, setAlert] = useState(false);
+
+    const handleTest = (e) => {
+        try {
+            e.preventDefault();
+            if (name !== "" || email !== "" || message !== "") {
+                console.log(e.target);
+            }
+            console.log("error");
+            setAlert(true);
+        } catch {
+            console.log("error");
+        }
+    };
+    function sendEmail(e) {
+        e.preventDefault();
+        if (name === "" || email === "" || message === "") {
+            console.log("error");
+        }
+        emailjs
+            .sendForm(
+                "service_gnw6vul",
+                "template_pdtdwsu",
+                e.target,
+                "JhbDhru5-Cy9S7OTy"
+            )
+            .then(
+                (result) => {
+                    console.log(result.text);
+                },
+                (error) => {
+                    console.log(error.text);
+                }
+            );
+    }
+    const ZoomInScrollOut = batch(StickyIn(), FadeIn(), ZoomIn(), FadeOut());
+    const FadeUp = batch(Fade(), Move(0, 50), Sticky());
+    return (
+        <>
+            <div className=" ">
+                <div id="HomePage" className=" flex-col flex gap-8 mt-12">
+                    <NavHome />
+                    <div className="bg-[#F4F3FE] max-w-screen-2xl mx-auto  p-20 pt-12 rounded-3xl flex flex-col gap-16   text-center">
+                        <div className="flex flex-col gap-4">
+                            <div className=" text-[56px]  mt-8  text-[#322A3C] leading-[120%] font-bold">
+                                I’m Term{" "}
+                                <span className=" text-[#6A5BE1]">
+                                    Fullstack
+                                </span>{" "}
+                                Developer Website
+                            </div>
+                            <div className=" text-[16px] font-semibold text-[#50555C] ">
+                                The quick, brown fox jumps over a lazy dog. DJs
+                                flock by when
+                            </div>
+                        </div>
+                        <div>
+                            <CardHome />
+                        </div>
+                    </div>{" "}
+                </div>
+                <ScrollContainer snap="none">
+                    <ScrollPage>
+                        <Animator
+                            animation={batch(
+                                Fade(),
+                                Sticky(),
+                                MoveOut(0, -200)
+                            )}
+                        ></Animator>
+                    </ScrollPage>
+                    <ScrollPage page={0}>
+                        <Animator animation={ZoomInScrollOut}>
+                            <div
+                                id="RecentProjects"
+                                className=" text-[#322A3C] child  lg:text-6xl text-4xl lg:mt-8 md:text-5xl mt-0 text-center md:text-left md:mt-4  font-bold opacity-50"
+                            >
+                                Recent Projects
+                            </div>
+                        </Animator>
+                    </ScrollPage>
+                    {/* ================= DevCats ==================== */}
+                    <ScrollPage page={1}>
+                        <Animator animation={FadeUp}>
+                            <div className="  max-w-screen-lg mx-auto">
+                                <div className=" lg:flex lg:flex-col flex-col flex  items-center gap-12">
+                                    <div className=" flex flex-col gap-8">
+                                        {/* <div className="  text-5xl font-semibold">
+                                        →
+                                    </div> */}
+                                        <Link to="/DevCats">
+                                            {" "}
+                                            <div className="text-[#6A5BE1]  md:text-5xl text-3xl font-semibold ">
+                                                DevCats
+                                            </div>
+                                        </Link>
+
+                                        <div className=" ">
+                                            DevCats co acts as an online media
+                                            platform between Developer
+                                            professionals from a variety of
+                                            fields developer and people who are
+                                            looking for employment to meet a
+                                            full range of customer needs
+                                            anywhere,{" "}
+                                            {
+                                                <button>
+                                                    <Link
+                                                        to="/DevCats"
+                                                        className=" text-[#6A5BE1]"
+                                                    >
+                                                        {"      "}
+                                                        Read more
+                                                    </Link>
+                                                </button>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div className=" ">
+                                        <img
+                                            src={devCatRecent}
+                                            alt="DevCats"
+                                            className="rounded-xl"
+                                        />
+                                    </div>
+
+                                    {/* <iframe
+                                    className="w-full h-full overflow-hidden rounded-xl"
+                                    src="https://www.youtube.com/embed/_DF9M0-tyKA"
+                                    title="YouTube video player"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen
+                                ></iframe> */}
+                                </div>
+                            </div>
+                        </Animator>
+                    </ScrollPage>
+                    {/* =================  TRM==================== */}
+                    <ScrollPage>
+                        <Animator animation={FadeUp}>
+                            <div className=" max-w-screen-lg">
+                                {" "}
+                                <div className="lg:flex lg:flex-col-reverse   flex flex-col-reverse  items-center gap-12">
+                                    <div className=" ">
+                                        <img
+                                            src={trmRecent}
+                                            alt="DevCats"
+                                            className="rounded-xl"
+                                        />
+                                    </div>
+
+                                    <div className=" flex flex-col text-right  gap-4">
+                                        <Link to="/TRM">
+                                            {" "}
+                                            <div className=" text-[#6A5BE1] md:text-5xl text-3xl font-semibold">
+                                                TRM
+                                            </div>
+                                        </Link>
+                                        <div className=" ">
+                                            TomorrowRich are Believer website
+                                            and Mini Shop co acts as an online
+                                            media platform for people who are
+                                            looking for Travel with Belief,
+                                            {
+                                                <span className=" text-[#6A5BE1]">
+                                                    {"      "}
+                                                    Read more
+                                                </span>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </Animator>
+                    </ScrollPage>
+                    {/* =================Recent Features==================== */}
+                    <ScrollPage>
+                        <Animator animation={ZoomInScrollOut}>
+                            <div className=" max-w-screen-lg mx-auto text-[#322A3C] lg:text-[56px] text-4xl lg:mt-8 md:text-5xl mt-0 text-center md:text-left md:mt-4  font-bold opacity-50">
+                                Recent Features
+                            </div>
+                        </Animator>
+                    </ScrollPage>
+
+                    {/* =================Recent Features 1==================== */}
+
+                    <ScrollPage>
+                        <Animator animation={FadeUp}>
+                            <div className=" w-screen bg-[#F4F3FE] px-24 rounded-3xl">
+                                <div className="flex flex-col-reverse text-center overflow-y-hidden  max-w-screen-xl mx-auto pt-20 items-center gap-12">
+                                    <div className=" w-[70%] h-[70%]">
+                                        <img
+                                            src={FeatureS}
+                                            alt=""
+                                            className=" w-full h-full"
+                                        />
+                                    </div>
+                                    <div className=" flex flex-col gap-4 ">
+                                        <div className=" text-[#6A5BE1] mt-16 lg:mt-0 md:text-5xl text-3xl font-semibold">
+                                            Feature Socket io
+                                        </div>
+                                        <div className=" ">
+                                            Socket.IO brings to mind WebSockets.
+                                            WebSockets are also a browser
+                                            implementation allowing
+                                            bi-directional communication, it
+                                            upgrades to the best connection
+                                            method available. In most cases,
+                                            this will result in a WebSocket
+                                            connection.
+                                            {
+                                                <span className=" text-[#6A5BE1] ">
+                                                    {"      "}
+                                                    Read more
+                                                </span>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </Animator>
+                    </ScrollPage>
+                    {/* =================Recent Features 2==================== */}
+                    <ScrollPage>
+                        <Animator animation={FadeUp}>
+                            <div className=" w-screen bg-[#F4F3FE] px-24 rounded-3xl">
+                                <div className="flex-col-reverse  flex text-center max-w-screen-lg mx-auto pt-20  items-center gap-4">
+                                    <div className=" w-[90%] h-[70%]">
+                                        <img
+                                            src={FeatureJ}
+                                            alt=""
+                                            className=" w-full h-full"
+                                        />
+                                        {/* <video
+                                            autoPlay
+                                            loop
+                                            muted
+                                            // controls
+                                            className=" object-cover col-span-2   w-full h-full rounded-xl"
+                                        >
+                                            <source
+                                                src="https://res.cloudinary.com/dmu2skvrn/video/upload/v1659348287/Video/demofinal_kt6urd.mov"
+                                                type="video/mp4"
+                                            />
+                                        </video> */}
+                                    </div>
+
+                                    <div className=" flex flex-col gap-4 ">
+                                        <div className=" text-[#6A5BE1] mt-16 lg:mt-0 md:text-5xl text-3xl font-semibold">
+                                            Jodit
+                                        </div>
+                                        <div className=" ">
+                                            An excellent WYSIWYG editor written
+                                            in pure TypeScript without the use
+                                            of additional libraries. Its file
+                                            editor and image editor.
+                                            {
+                                                <span className=" text-[#6A5BE1] ">
+                                                    {"      "}
+                                                    Read more
+                                                </span>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </Animator>
+                    </ScrollPage>
+                    {/* ========== */}
+                    <ScrollPage>
+                        <Animator animation={FadeUp}>
+                            <div className="flex flex-col gap-12">
+                                <div className=" flex flex-col gap-8 items-center">
+                                    <div className=" text-[#322A3C] lg:text-[48px] text-4xl lg:mt-8 md:text-5xl mt-0 text-center md:text-left md:mt-4  font-bold ">
+                                        Technical Skills
+                                    </div>
+                                    <div>
+                                        I am a quick learner and specialize in
+                                        multitude of skills required for{" "}
+                                        <span className="text-[#6A5BE1]">
+                                            Software Engineer
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="grid grid-cols-4 gap-12  max-w-screen-lg mx-auto">
+                                    {technical.map((el, idx) => {
+                                        return (
+                                            <div
+                                                key={idx}
+                                                className="flex flex-col gap-4 items-center"
+                                            >
+                                                <img
+                                                    src={el.img}
+                                                    className="w-[96px] h-[96px] "
+                                                    alt=""
+                                                />
+                                                <div>{el.title}</div>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        </Animator>
+                    </ScrollPage>
+                    {/* ========== */}
+                    <ScrollPage>
+                        <Animator animation={FadeUp}>
+                            <div className=" flex flex-col gap-20">
+                                <div className=" max-w-screen-lg mx-auto text-[#322A3C] lg:text-[56px] text-4xl lg:mt-0 md:text-5xl mt-0 text-center md:text-left md:mt-4  font-bold opacity-50">
+                                    Let's Know Me!
+                                </div>
+                                <div className="bg-[#F4F3FE] rounded-xl max-w-screen-lg mx-auto">
+                                    <div className=" grid grid-cols-2 items-center px-16 p-12 gap-16">
+                                        <div className=" flex flex-col gap-8">
+                                            <div className=" text-[24px] font-semibold">
+                                                Hello! I’m{" "}
+                                                <span className="text-[#6A5BE1]">
+                                                    Thawin Kuwattananon.
+                                                </span>
+                                            </div>
+                                            <div className=" text-[16px] text-[#50555C]">
+                                                I am a skilled full stack
+                                                developer. I am a quick learner
+                                                and a team worker that gets the
+                                                job done. I can easily
+                                                capitalize on low hanging fruits
+                                                and quickly maximize timely
+                                                deliverables for real-time
+                                                schemas.
+                                            </div>
+                                            <div className="text-[20px] text-[#6A5BE1] flex gap-4">
+                                                <Link
+                                                    to="/AboutMe"
+                                                    className=""
+                                                >
+                                                    Download CV
+                                                </Link>{" "}
+                                                <div> | </div>
+                                                <Link
+                                                    to="/AboutMe"
+                                                    className=""
+                                                >
+                                                    About me
+                                                </Link>
+                                            </div>
+                                        </div>
+                                        <div className=" h-[313px] ">
+                                            <img
+                                                src={Mobile}
+                                                className="w-full h-full object-cover rounded-xl"
+                                                alt=""
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </Animator>
+                    </ScrollPage>
+                </ScrollContainer>
+                <div className=" h-full flex-col gap-12">
+                    {" "}
+                    <div className="max-w-screen-xl mx-auto grid text-left items-center relative lg:mt-0   gap-12">
+                        <div>
+                            <div className="pt-12 md:text-5xl text-3xl font-semibold max-w-screen-lg mx-auto ">
+                                Contact Me
+                            </div>
+                        </div>
+
+                        <div className=" grid grid-cols-2 gap-8 px-12">
+                            <form
+                                onSubmit={handleTest}
+                                className=" flex flex-col gap-4 bg-[#F4F3FE] p-12 rounded-xl"
+                            >
+                                <div className="flex flex-col gap-2">
+                                    <div>Name</div>
+                                    <input
+                                        className="w-full p-4 h-8 rounded-md"
+                                        type="text"
+                                        name="name"
+                                        onChange={(e) =>
+                                            setName(e.target.value)
+                                        }
+                                    />
+                                </div>
+                                <div className="flex flex-col gap-2">
+                                    <div>Email</div>
+                                    <input
+                                        className="w-full p-4  h-8 rounded-md"
+                                        type="text"
+                                        name="email"
+                                        onChange={(e) =>
+                                            setEmail(e.target.value)
+                                        }
+                                    />
+                                </div>
+                                <div className="flex flex-col gap-2">
+                                    <div>Message</div>
+                                    <textarea
+                                        className=" rounded-lg p-4 w-full h-32"
+                                        name="message"
+                                        id=""
+                                        onChange={(e) =>
+                                            setMessage(e.target.value)
+                                        }
+                                    ></textarea>
+                                </div>
+                                <button
+                                    type="submit"
+                                    className=" bg-[#6A5AE0] mt-4 text-[#FFFFFF] w-24 text-center text-[18px] font-semibold rounded-lg p-3"
+                                >
+                                    Submit
+                                </button>
+                            </form>
+                            <div className=" flex flex-col gap-8 px-12">
+                                <div className="lg:text-[28px] font-semibold">
+                                    Let’s talk how{" "}
+                                    <span className="text-[#6A5AE0]">
+                                        {" "}
+                                        I can help you!{" "}
+                                    </span>
+                                </div>
+                                <div className="flex flex-col gap-4 ">
+                                    <div>
+                                        If you like my work and want to avail my
+                                        services then drop me a message using
+                                        the contact form.
+                                    </div>
+                                    <div>
+                                        Or get in touch using my email or my
+                                        contact number.
+                                    </div>
+                                    <div>See you!</div>
+                                </div>
+                                <div>
+                                    <div className="flex gap-12">
+                                        <div>Email: </div>
+                                        <div className=" font-semibold">
+                                            Thawin.kuwa@gmail.com
+                                        </div>
+                                    </div>
+                                    <div className="flex gap-12">
+                                        <div>Phone: </div>
+                                        <div className=" font-semibold">
+                                            +669-5294-6993
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {/* </div> */}
+
+                        <a
+                            href="#HomePage"
+                            className="animate-pulse absolute  -bottom-10 -right-40 z-50 mr-4 mb-4 text-black"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-12 w-12"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                strokeWidth={2}
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M5 11l7-7 7 7M5 19l7-7 7 7"
+                                />
+                            </svg>
+                        </a>
+                    </div>
+                    <Footer />
+                </div>
+            </div>
+        </>
+        // <div className=" w-screen items-center flex flex-col justify-center">
+        //     <div className="containerr">
+        //         <div className=" child">Section1</div>
+        //         <div className=" child">Section2</div>
+        //         <div className=" child">Section3</div>
+        //         <div className=" child">Section4</div>
+        //         <div className=" child">Section5</div>
+        //     </div>
+        // </div>
+    );
+}
+
+export default TestFull;
