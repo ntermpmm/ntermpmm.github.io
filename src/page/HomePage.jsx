@@ -514,7 +514,7 @@ function FirstPage() {
 
                             <div className=" flex flex-col-reverse lg:grid lg:grid-cols-2 gap-8 px-12">
                                 <form
-                                    onSubmit={handleTest}
+                                    onSubmit={sendEmail}
                                     className=" flex flex-col gap-4 bg-[#F4F3FE] lg:w-full  md:w-[720px] p-12 rounded-xl"
                                 >
                                     <div className="flex flex-col gap-2">
