@@ -1,9 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import BG from "../assets/image/BG.png";
 import TRMBG from "../assets/image/TRMBG.png";
-import TRMBG1 from "../assets/image/TRMBG1.png";
-import Mobile from "../assets/image/Mobile.png";
 import { motion } from "framer-motion";
 import AOS from "aos";
 import "aos/dist/aos.css";

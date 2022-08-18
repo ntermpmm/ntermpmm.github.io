@@ -1,7 +1,6 @@
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import CardHome from "../components/element/CardHome";
-import Mobile from "../assets/image/Mobile.png";
 import Term from "../assets/image/Term.jpg";
 import NavHome from "../components/navbar/NavHome";
 import Footer from "../components/footer/Footer";
