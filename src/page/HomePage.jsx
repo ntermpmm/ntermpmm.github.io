@@ -188,8 +188,8 @@ function FirstPage() {
                                     Developer Website
                                 </div>
                                 <div className=" text-[16px] font-semibold text-[#50555C] ">
-                                    The quick, brown fox jumps over a lazy dog.
-                                    DJs flock by when
+                                    Welcome to my portfolio, you can know me
+                                    better with this website!
                                 </div>
                             </div>
                             <div className=" hidden sm:block">
