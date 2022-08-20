@@ -166,7 +166,7 @@ function FirstPage() {
                                     </span>{" "}
                                     Developer Website
                                 </div>
-                                <div className=" text-center block sm:hidden text-[56px] mt-20  text-[#322A3C] leading-[120%] font-bold">
+                                <div className=" text-center block sm:hidden text-[56px] mt-8  text-[#322A3C] leading-[120%] font-bold">
                                     <span className=" text-[#6A5BE1]">
                                         Fullstack
                                     </span>{" "}
@@ -181,7 +181,7 @@ function FirstPage() {
                                     me "Term", you can know me better with this
                                     website!
                                     <div className="text-sm mt-4">
-                                        (use desktop version for more
+                                        (use desktop version for better
                                         experience!!!)
                                     </div>
                                 </div>
@@ -189,7 +189,7 @@ function FirstPage() {
                             <div className=" hidden sm:block">
                                 <CardHome />
                             </div>
-                            <div className="absolute sm:hidden bottom-40 text-black left-0 right-0 flex justify-center ">
+                            <div className="absolute sm:hidden bottom-0 text-black left-0 right-0 flex justify-center ">
                                 <a
                                     href="#RecentProjects"
                                     className="animate-bounce arrow-circle-down text-text_color"
