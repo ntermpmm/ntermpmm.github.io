@@ -10,8 +10,11 @@ import devCatRecent from "../assets/image/devCatRecent.png";
 import trmRecent from "../assets/image/trmRecent.png";
 import emailjs from "@emailjs/browser";
 import { useState } from "react";
+import * as yup from "yup";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import InputForm from "../components/formYup/InputForm";
+import { Form } from "../components/formYup/Form";
 
 AOS.init({
     // Global settings:
@@ -23,7 +26,7 @@ AOS.init({
     disableMutationObserver: false, // disables automatic mutations' detections (advanced)
     debounceDelay: 50, // the delay on debounce used while resizing window (advanced)
     throttleDelay: 99, // the delay on throttle used while scrolling the page (advanced)
-    duration: 2000,
+    duration: 1000,
 
     // Settings that can be overridden on per-element basis, by `data-aos-*` attributes:
     offset: 120, // offset (in px) from the original trigger point
@@ -36,6 +39,11 @@ AOS.init({
 });
 
 function FirstPage() {
+    const schema = yup.object().shape({
+        Name: yup.string().required("Username is required"),
+        Email: yup.string().required("Password is required"),
+        Message: yup.string().required("Password is required"),
+    });
     const technical = [
         {
             img: "https://res.cloudinary.com/do58tgs2e/image/upload/v1646850887/Logo/html5_cykxyz.png",
@@ -106,61 +114,38 @@ function FirstPage() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
+    const [checkSubmit, setCheckSubmit] = useState(false);
     const [alert, setAlert] = useState(false);
 
-    // const handleTest = (e) => {
-    //     try {
-    //         e.preventDefault();
-    //         if (name !== "" || email !== "" || message !== "") {
-    //             console.log(e.target);
-    //         }
-    //         console.log("error");
-    //         setAlert(true);
-    //     } catch {
-    //         console.log("error");
-    //     }
-    // };
-    function sendEmail(e) {
-        e.preventDefault();
-        if (name === "" || email === "" || message === "") {
-            console.log("error");
-        }
-        emailjs
-            .sendForm(
-                "service_gnw6vul",
-                "template_pdtdwsu",
-                e.target,
-                "JhbDhru5-Cy9S7OTy"
-            )
-            .then(
-                (result) => {
-                    console.log(result.text);
-                },
-                (error) => {
-                    console.log(error.text);
-                }
-            );
-    }
+    const checkEmail = email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g);
 
-    document.addEventListener(
-        "scroll",
-        (event) => {
-            const aosAnimation = document.querySelectorAll("[data-aos]");
-            let observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry) => {
-                    if (entry.intersectionRatio > 0) {
-                        entry.target.classList.add("aos-animate");
-                    } else {
-                        entry.target.classList.remove("aos-animate");
-                    }
-                });
-            });
-            aosAnimation.forEach((aosObject) => {
-                observer.observe(aosObject);
-            });
-        },
-        { capture: true, passive: true }
-    );
+    const sendEmail = (e) => {
+        try {
+            setCheckSubmit(true);
+            e.preventDefault();
+            if (name !== "" && checkEmail !== null && message !== "") {
+                emailjs
+                    .sendForm(
+                        "service_gnw6vul",
+                        "template_pdtdwsu",
+                        e.target,
+                        "JhbDhru5-Cy9S7OTy"
+                    )
+                    .then(
+                        (result) => {
+                            console.log(result.text);
+                        },
+                        (error) => {
+                            console.log(error.text);
+                        }
+                    );
+            }
+            // console.log("error");
+            // setAlert(true);
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
     return (
         <>
@@ -172,7 +157,7 @@ function FirstPage() {
                         className="  snap-start h-screen flex-col flex gap-8  "
                     >
                         <NavHome />
-                        <div className="bg-[#F4F3FE] relative p-20 pt-12 rounded-3xl md:max-w-screen-2xl md:mx-auto flex flex-col gap-16   text-center">
+                        <div className="bg-[#F4F3FE] sm:h-auto h-full mb-12 relative p-20 pt-12 rounded-3xl md:max-w-screen-2xl md:mx-auto flex flex-col gap-16   text-center">
                             <div className="flex flex-col gap-4">
                                 <div className=" hidden sm:block md:text-[56px] sm:text-[48px] mt-8  text-[#322A3C] leading-[120%] font-bold">
                                     I’m Term{" "}
@@ -181,28 +166,37 @@ function FirstPage() {
                                     </span>{" "}
                                     Developer Website
                                 </div>
-                                <div className=" text-center block sm:hidden text-[56px] mt-8  text-[#322A3C] leading-[120%] font-bold">
+                                <div className=" text-center block sm:hidden text-[56px] mt-20  text-[#322A3C] leading-[120%] font-bold">
                                     <span className=" text-[#6A5BE1]">
                                         Fullstack
                                     </span>{" "}
                                     Developer Website
                                 </div>
-                                <div className=" text-[16px] font-semibold text-[#50555C] ">
+                                <div className="hidden sm:block text-[16px] font-semibold text-[#50555C] ">
                                     Welcome to my portfolio, you can know me
                                     better with this website!
+                                </div>
+                                <div className=" sm:hidden text-[16px] mt-4 font-semibold text-[#50555C] ">
+                                    Hi! I'm Thawin Kuwattananon or you can call
+                                    me "Term", you can know me better with this
+                                    website!
+                                    <div className="text-sm mt-4">
+                                        (use desktop version for more
+                                        experience!!!)
+                                    </div>
                                 </div>
                             </div>
                             <div className=" hidden sm:block">
                                 <CardHome />
                             </div>
-                            <div className="absolute sm:hidden -bottom-20 text-black left-0 right-0 flex justify-center ">
+                            <div className="absolute sm:hidden bottom-40 text-black left-0 right-0 flex justify-center ">
                                 <a
                                     href="#RecentProjects"
-                                    className="animate-pulse arrow-circle-down text-text_color"
+                                    className="animate-bounce arrow-circle-down text-text_color"
                                 >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
-                                        className="h-12 w-12"
+                                        className="h-16 w-16"
                                         fill="none"
                                         viewBox="0 0 24 24"
                                         stroke="currentColor"
@@ -232,18 +226,18 @@ function FirstPage() {
                     <div className="child">
                         <div className="  max-w-screen-lg mx-auto">
                             <div className=" lg:flex lg:flex-col flex-col flex  items-center gap-12">
-                                <div className=" flex flex-col gap-8">
+                                <div className=" flex flex-col gap-8 px-2 sm:px-0 sm:text-left text-center">
                                     {/* <div className="  text-5xl font-semibold">
                                         →
                                     </div> */}
                                     <Link to="/DevCats">
                                         {" "}
-                                        <div className="text-[#6A5BE1]  md:text-5xl text-3xl font-semibold ">
+                                        <div className="text-[#6A5BE1]  md:text-5xl sm:text-3xl text-5xl font-semibold ">
                                             DevCats
                                         </div>
                                     </Link>
 
-                                    <div className=" ">
+                                    <div className="sm:text-lg text-xl">
                                         DevCats co acts as an online media
                                         platform between Developer professionals
                                         from a variety of fields developer and
@@ -284,7 +278,7 @@ function FirstPage() {
                     <div className="child">
                         <div className=" max-w-screen-lg">
                             {" "}
-                            <div className="lg:flex lg:flex-col-reverse   flex flex-col-reverse  items-center gap-12">
+                            <div className="lg:flex lg:flex-col-reverse   flex flex-col-reverse  items-center sm:gap-12 gap-20">
                                 <div className=" ">
                                     <img
                                         src={trmRecent}
@@ -293,14 +287,14 @@ function FirstPage() {
                                     />
                                 </div>
 
-                                <div className=" flex flex-col text-right  gap-4">
+                                <div className=" flex flex-col sm:text-right text-center gap-8 sm:px-0 px-4  sm:gap-4">
                                     <Link to="/TRM">
                                         {" "}
-                                        <div className=" text-[#6A5BE1] md:text-5xl text-3xl font-semibold">
+                                        <div className=" text-[#6A5BE1] md:text-5xl sm:text-3xl text-5xl  font-semibold">
                                             TRM
                                         </div>
                                     </Link>
-                                    <div className=" ">
+                                    <div className=" sm:text-lg text-xl">
                                         TomorrowRich are Believer website and
                                         Mini Shop co acts as an online media
                                         platform for people who are looking for
@@ -327,35 +321,27 @@ function FirstPage() {
                     </div>
                     {/* =================Recent Features==================== */}
 
-                    <div className="child bg-[#F4F3FE]">
+                    <div className="child bg-[#F4F3FE] overflow-x-hidden">
                         {/* <div className=" flex flex-col gap-12"> */}
 
-                        <div className=" w-full bg-[#F4F3FE] px-24 rounded-3xl">
+                        <div className=" w-full bg-[#F4F3FE] sm:px-24 rounded-3xl ">
                             <div className="flex flex-col-reverse text-center overflow-y-hidden  max-w-screen-xl mx-auto lg:pt-20 items-center gap-12">
-                                <div className=" w-[70%] h-[70%] xl:mr-16 md:mr-8 mr-4">
+                                <div className=" sm:w-[70%] sm:h-[70%] w-[400px]  h-full xl:mr-16 md:mr-8 mr-4">
                                     <img
                                         src={FeatureS}
                                         alt=""
                                         className=" w-full h-full"
                                     />
-                                    {/* <video
-                                            autoPlay
-                                            loop
-                                            muted
-                                            // controls
-                                            className=" object-cover col-span-2   w-full h-full rounded-xl"
-                                        >
-                                            <source
-                                                src="https://res.cloudinary.com/dmu2skvrn/video/upload/v1659348287/Video/demofinal_kt6urd.mov"
-                                                type="video/mp4"
-                                            />
-                                        </video> */}
                                 </div>
                                 <div className=" flex flex-col gap-4 ">
                                     <div className=" text-[#6A5BE1] mt-16 lg:mt-0 md:text-5xl text-3xl font-semibold">
-                                        Feature Socket io
+                                        <span className="text-[#0F0A34]">
+                                            {" "}
+                                            Feature
+                                        </span>{" "}
+                                        Socket io
                                     </div>
-                                    <div className=" ">
+                                    <div className=" px-16 sm:px-0">
                                         Socket.IO brings to mind WebSockets.
                                         WebSockets are also a browser
                                         implementation allowing bi-directional
@@ -377,33 +363,25 @@ function FirstPage() {
                     {/* =================Recent Features 2==================== */}
                     <div className="child bg-[#F4F3FE]">
                         {" "}
-                        <div className="childx w-full bg-[#F4F3FE] px-24 rounded-3xl">
-                            <div className="flex-col-reverse  flex text-center max-w-screen-lg mx-auto pt-20  items-center gap-4">
+                        <div className="childx w-full bg-[#F4F3FE] sm:px-24 rounded-3xl">
+                            <div className="flex-col-reverse  flex text-center max-w-screen-lg mx-auto pt-20  items-center gap-12">
                                 <div className=" xl:mr-16 md:mr-8 mr-4">
                                     <img
                                         src={FeatureJ}
                                         alt=""
                                         className=" w-full h-full"
                                     />
-                                    {/* <video
-                                            autoPlay
-                                            loop
-                                            muted
-                                            // controls
-                                            className=" object-cover col-span-2   w-full h-full rounded-xl"
-                                        >
-                                            <source
-                                                src="https://res.cloudinary.com/dmu2skvrn/video/upload/v1659348287/Video/demofinal_kt6urd.mov"
-                                                type="video/mp4"
-                                            />
-                                        </video> */}
                                 </div>
 
                                 <div className=" flex flex-col gap-4 ">
                                     <div className=" text-[#6A5BE1] mt-16 lg:mt-0 md:text-5xl text-3xl font-semibold">
+                                        <span className="text-[#0F0A34]">
+                                            {" "}
+                                            Feature
+                                        </span>{" "}
                                         Jodit
                                     </div>
-                                    <div className=" ">
+                                    <div className="px-16 sm:px-0 ">
                                         An excellent WYSIWYG editor written in
                                         pure TypeScript without the use of
                                         additional libraries. Its file editor
@@ -523,39 +501,67 @@ function FirstPage() {
                                     <div className="flex flex-col gap-2">
                                         <div>Name</div>
                                         <input
+                                            required
                                             className="w-full p-4 h-8 rounded-md"
                                             type="text"
+                                            placeholder="Your Name"
                                             name="name"
                                             onChange={(e) =>
                                                 setName(e.target.value)
                                             }
                                         />
+                                        {checkSubmit ? (
+                                            !name ? (
+                                                <div className=" text-xs text-[#F5006C]">
+                                                    *Name is Required
+                                                </div>
+                                            ) : null
+                                        ) : null}
                                     </div>
                                     <div className="flex flex-col gap-2">
                                         <div>Email</div>
+
                                         <input
+                                            required
                                             className="w-full p-4  h-8 rounded-md"
+                                            placeholder="Your Email"
                                             type="text"
                                             name="email"
                                             onChange={(e) =>
                                                 setEmail(e.target.value)
                                             }
                                         />
+                                        {checkSubmit ? (
+                                            !checkEmail ? (
+                                                <div className=" text-[#F5006C] text-xs">
+                                                    *Email is required
+                                                </div>
+                                            ) : null
+                                        ) : null}
                                     </div>
                                     <div className="flex flex-col gap-2">
                                         <div>Message</div>
                                         <textarea
+                                            required
                                             className=" rounded-lg p-4 w-full h-32"
+                                            placeholder="Message"
                                             name="message"
                                             id=""
                                             onChange={(e) =>
                                                 setMessage(e.target.value)
                                             }
                                         ></textarea>
+                                        {checkSubmit ? (
+                                            !message ? (
+                                                <div className=" text-[#F5006C] text-xs">
+                                                    *Message is required
+                                                </div>
+                                            ) : null
+                                        ) : null}
                                     </div>
                                     <button
                                         type="submit"
-                                        className=" bg-[#6A5AE0] mt-4 text-[#FFFFFF] w-24 text-center text-[18px] font-semibold rounded-lg p-3"
+                                        className=" bg-[#6A5AE0] mt-4 text-[#FFFFFF] w-24 text-center sm:text-[18px] text-md font-semibold rounded-lg p-3"
                                     >
                                         Submit
                                     </button>
